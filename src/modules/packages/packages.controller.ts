@@ -1,6 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { PackagesService } from './packages.service';
-import { CreatePackageDto,DefaultPackageResponse,PaginatedPackagesResponse } from './dto/create-package.dto';
+import {
+  CreatePackageDto,
+  DefaultPackageResponse,
+  PaginatedPackagesResponse,
+} from './dto/create-package.dto';
 import { UpdatePackageDto } from './dto/update-package.dto';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -9,10 +22,9 @@ import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 export class PackagesController {
   constructor(private readonly service: PackagesService) {}
 
-  
   @Post()
   @ApiResponse({
-    type: DefaultPackageResponse
+    type: DefaultPackageResponse,
   })
   create(@Body() payload: CreatePackageDto) {
     return this.service.create(payload);
@@ -20,20 +32,38 @@ export class PackagesController {
 
   @Get()
   @ApiResponse({
-    type: PaginatedPackagesResponse
+    type: PaginatedPackagesResponse,
   })
-  @ApiQuery({ name: 'page', type: 'string', required: false, })
-  @ApiQuery({ name: 'limit', type: 'string', required: false, })
-  @ApiQuery({ name: 'client', type: 'string', required: false, })
-  @ApiQuery({ name: 'q', required: false, })
-  findAll(@Query('page') page: string = "1",
-  @Query('limit') limit: string = "100",@Query('q') q: string,@Query('client') client: string,) {
-    return this.service.findAll({ limit: Number(limit), page: Number(page), q , client: +client});
+  @ApiQuery({ name: 'page', type: 'string', required: false })
+  @ApiQuery({ name: 'limit', type: 'string', required: false })
+  @ApiQuery({ name: 'client', type: 'string', required: false })
+  @ApiQuery({ name: 'q', required: false })
+  findAll(
+    @Query('page') page: string = '1',
+    @Query('limit') limit: string = '100',
+    @Query('q') q: string,
+    @Query('client') client: string,
+  ) {
+    return this.service.findAll({
+      limit: Number(limit),
+      page: Number(page),
+      q,
+      client: +client,
+    });
   }
 
-  @Get(':id')  
+  @Get('charges/:id')
   @ApiResponse({
-    type: DefaultPackageResponse
+    type: DefaultPackageResponse,
+    isArray: true,
+  })
+  findByChargeId(@Param('id') id: string) {
+    return this.service.findByChargeId(+id);
+  }
+
+  @Get(':id')
+  @ApiResponse({
+    type: DefaultPackageResponse,
   })
   findOne(@Param('id') id: string) {
     return this.service.findOne(+id);
@@ -41,7 +71,7 @@ export class PackagesController {
 
   @Patch(':id')
   @ApiResponse({
-    type: DefaultPackageResponse
+    type: DefaultPackageResponse,
   })
   update(@Param('id') id: string, @Body() payload: UpdatePackageDto) {
     return this.service.update(+id, payload);

@@ -34,6 +34,15 @@ export class ClientsController {
     return this.service.findAll({ limit: Number(limit), page: Number(page), q });
   }
 
+  @Get("/search")
+  @ApiResponse({
+    type: DefaultClientResponse
+  })
+  @ApiQuery({ name: 'q', required: true, })
+  findAllWintnPagination(@Query('q') q: string) {
+    return this.service.findAllWintnPagination({q})
+  }
+
   @Get(':id')  
   @ApiResponse({
     type: DefaultClientResponse

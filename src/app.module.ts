@@ -30,6 +30,7 @@ import { TransactionsModule } from './modules/transactions/transactions.module';
         abortEarly: true,
       }
     }),
+    
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),

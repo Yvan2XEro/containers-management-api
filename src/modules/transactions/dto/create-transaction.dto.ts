@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger"
 import { IsDate, IsEnum, IsOptional, IsString } from "class-validator"
-import { PaginatedMetaDto } from "src/shared/dto/paginated.dto"
+import { PaginatedMetaDto } from "../../../shared/dto/paginated.dto"
 
 export class CreateTransactionDto {
 

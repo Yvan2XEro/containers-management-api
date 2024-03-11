@@ -1,6 +1,6 @@
-import { Transaction } from "src/modules/transactions/entities/transaction.entity";
-import { DecimalColumnTransformer } from "src/shared/classes/decimal-column-transformer";
-import { DefaultEntity } from "src/shared/entities/default.entity";
+import { Transaction } from "../../../modules/transactions/entities/transaction.entity";
+import { DecimalColumnTransformer } from "../../../shared/classes/decimal-column-transformer";
+import { DefaultEntity } from "../../../shared/entities/default.entity";
 import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 
 @Entity("charges")

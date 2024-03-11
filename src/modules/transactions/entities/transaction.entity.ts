@@ -1,4 +1,4 @@
-import { DefaultEntity } from "src/shared/entities/default.entity";
+import { DefaultEntity } from "../../../shared/entities/default.entity";
 import { Column, Entity } from "typeorm";
 
 @Entity("transactions")

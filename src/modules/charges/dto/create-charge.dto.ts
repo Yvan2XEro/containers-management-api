@@ -1,8 +1,8 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger"
 import { IsNumber, IsOptional, IsString } from "class-validator"
-import { DefaultTransactionResponse } from "src/modules/transactions/dto/create-transaction.dto"
-import { Transaction } from "src/modules/transactions/entities/transaction.entity"
-import { PaginatedMetaDto } from "src/shared/dto/paginated.dto"
+import { DefaultTransactionResponse } from "../../../modules/transactions/dto/create-transaction.dto"
+import { Transaction } from "../../../modules/transactions/entities/transaction.entity"
+import { PaginatedMetaDto } from "../../../shared/dto/paginated.dto"
 
 export class CreateChargeDto {
 

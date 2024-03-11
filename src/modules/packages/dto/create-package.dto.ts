@@ -1,10 +1,10 @@
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger"
 import { IsDate, IsEnum, IsNumber, IsOptional, IsString } from "class-validator"
-import { DefaultChargeResponse } from "src/modules/charges/dto/create-charge.dto"
-import { Charge } from "src/modules/charges/entities/charge.entity"
-import { DefaultClientResponse } from "src/modules/clients/dto/create-client.dto"
-import { Client } from "src/modules/clients/entities/client.entity"
-import { PaginatedMetaDto } from "src/shared/dto/paginated.dto"
+import { DefaultChargeResponse } from "../../../modules/charges/dto/create-charge.dto"
+import { Charge } from "../../../modules/charges/entities/charge.entity"
+import { DefaultClientResponse } from "../../../modules/clients/dto/create-client.dto"
+import { Client } from "../../../modules/clients/entities/client.entity"
+import { PaginatedMetaDto } from "../../../shared/dto/paginated.dto"
 
 const statusArray = ["in_transit", "delivered","damaged"]
 

@@ -1,7 +1,7 @@
-import { Charge } from "src/modules/charges/entities/charge.entity";
-import { Client } from "src/modules/clients/entities/client.entity";
-import { DecimalColumnTransformer } from "src/shared/classes/decimal-column-transformer";
-import { DefaultEntity } from "src/shared/entities/default.entity";
+import { Charge } from "../../../modules/charges/entities/charge.entity";
+import { Client } from "../../../modules/clients/entities/client.entity";
+import { DecimalColumnTransformer } from "../../../shared/classes/decimal-column-transformer";
+import { DefaultEntity } from "../../../shared/entities/default.entity";
 import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 
 @Entity("packages")

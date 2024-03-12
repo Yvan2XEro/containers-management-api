@@ -5,8 +5,8 @@ import { Charge } from "../../../modules/charges/entities/charge.entity"
 import { DefaultClientResponse } from "../../../modules/clients/dto/create-client.dto"
 import { Client } from "../../../modules/clients/entities/client.entity"
 import { PaginatedMetaDto } from "../../../shared/dto/paginated.dto"
-import { CubicMeter } from "src/modules/cubic-meters/entities/cubic-meter.entity"
-import { DefaultCubicMeterResponse } from "src/modules/cubic-meters/dto/create-cubic-meter.dto"
+import { CubicMeter } from "../../../modules/cubic-meters/entities/cubic-meter.entity"
+import { DefaultCubicMeterResponse } from "../../../modules/cubic-meters/dto/create-cubic-meter.dto"
 
 const statusArray = ["in_transit", "delivered","damaged"]
 

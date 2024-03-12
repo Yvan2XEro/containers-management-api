@@ -5,6 +5,8 @@ import { Charge } from "../../../modules/charges/entities/charge.entity"
 import { DefaultClientResponse } from "../../../modules/clients/dto/create-client.dto"
 import { Client } from "../../../modules/clients/entities/client.entity"
 import { PaginatedMetaDto } from "../../../shared/dto/paginated.dto"
+import { CubicMeter } from "src/modules/cubic-meters/entities/cubic-meter.entity"
+import { DefaultCubicMeterResponse } from "src/modules/cubic-meters/dto/create-cubic-meter.dto"
 
 const statusArray = ["in_transit", "delivered","damaged"]
 
@@ -27,9 +29,6 @@ export class CreatePackageDto {
     @IsNumber()
     @ApiProperty()
     volume: number
-    @IsNumber()
-    @ApiProperty()
-    value: number
 
     @ApiProperty()
     @IsDate()
@@ -50,6 +49,14 @@ export class CreatePackageDto {
     @IsOptional()
     @IsEnum(statusArray, {message: "status must be one of the following values: "+statusArray})
     status: "in_transit"| "delivered"| "damaged"
+
+    @ApiProperty()
+    @IsNumber()
+    cubicMeter: CubicMeter
+
+    @ApiProperty()
+    @IsNumber()
+    cubicMetersCount: number
 }
 
 export class DefaultPackageResponse extends CreatePackageDto {
@@ -71,6 +78,11 @@ export class DefaultPackageResponse extends CreatePackageDto {
         type: DefaultChargeResponse
     })
     charge: Charge|null
+
+    @ApiProperty({
+        type: DefaultCubicMeterResponse
+    })
+    cubicMeter: CubicMeter
 }
 
 export class PaginatedPackagesResponse {

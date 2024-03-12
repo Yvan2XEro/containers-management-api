@@ -1,3 +1,4 @@
+import { CubicMeter } from "../../../modules/cubic-meters/entities/cubic-meter.entity";
 import { Charge } from "../../../modules/charges/entities/charge.entity";
 import { Client } from "../../../modules/clients/entities/client.entity";
 import { DecimalColumnTransformer } from "../../../shared/classes/decimal-column-transformer";
@@ -31,13 +32,6 @@ export class Package extends DefaultEntity {
     })
     volume: number
 
-    @Column("decimal", {
-        precision: 10, scale: 2,
-        transformer: new DecimalColumnTransformer(),
-        default: 0
-    })
-    value: number
-
     @Column("date", {name: "sending_date", nullable: true})
     sendingDate: Date|null
 
@@ -55,6 +49,22 @@ export class Package extends DefaultEntity {
     })
     @JoinColumn({name: "charge_id"})
     charge: Charge
+
+    @ManyToOne(()=>CubicMeter, c=>c.id,{
+        onDelete: "SET NULL",
+        eager: true,
+        nullable: true
+    })
+    @JoinColumn({name: "cubic_meter_id"})
+    cubicMeter: CubicMeter
+
+    @Column("decimal",{
+        precision: 10, scale: 2,
+        transformer: new DecimalColumnTransformer(),
+        default: 0,
+        name: "cubic_meters_count"
+    })
+    cubicMetersCount: number
 }
 
 

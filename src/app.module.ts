@@ -12,6 +12,7 @@ import { ClientsModule } from './modules/clients/clients.module';
 import { PackagesModule } from './modules/packages/packages.module';
 import { ChargesModule } from './modules/charges/charges.module';
 import { TransactionsModule } from './modules/transactions/transactions.module';
+import { CubicMetersModule } from './modules/cubic-meters/cubic-meters.module';
 
 @Module({
   imports: [
@@ -68,6 +69,7 @@ import { TransactionsModule } from './modules/transactions/transactions.module';
     PackagesModule,
     ChargesModule,
     TransactionsModule,
+    CubicMetersModule,
   ],
 })
 export class AppModule { }

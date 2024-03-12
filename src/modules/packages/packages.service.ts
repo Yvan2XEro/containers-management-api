@@ -23,8 +23,11 @@ export class PackagesService {
     client,
   }: PaginationParams & { client?: number }) {
     const query = this.repository.createQueryBuilder('pack');
-    query.leftJoinAndSelect('pack.client', 'cl');
-    query.leftJoinAndSelect('pack.charge', 'ch');
+    query
+      .leftJoinAndSelect('pack.client', 'cl')
+      .leftJoinAndSelect('pack.charge', 'ch')
+      .leftJoinAndSelect('pack.cubicMeter', 'cm');
+
     if (q && q.length > 0) {
       const search = q.toLocaleLowerCase();
       query.where(`LOWER(pack.tracking_number) like '%${search}%'`);
@@ -47,6 +50,7 @@ export class PackagesService {
       .createQueryBuilder('pack')
       .leftJoinAndSelect('pack.client', 'cl')
       .leftJoinAndSelect('pack.charge', 'ch')
+      .leftJoinAndSelect('pack.cubicMeter', 'cm')
       .leftJoinAndSelect('ch.transaction', 'tr')
       .where('charge_id = :id', { id });
 

@@ -57,6 +57,18 @@ export class PackagesService {
     return query.getMany();
   }
 
+  async findByClientId(id: number) {
+    const query = this.repository
+      .createQueryBuilder('pack')
+      .leftJoinAndSelect('pack.client', 'cl')
+      .leftJoinAndSelect('pack.charge', 'ch')
+      .leftJoinAndSelect('pack.cubicMeter', 'cm')
+      .leftJoinAndSelect('ch.transaction', 'tr')
+      .where('client_id = :id', { id });
+
+    return query.getMany();
+  }
+
   async findOne(id: number) {
     const check = await this.repository.findOne({ where: { id } });
     if (!check) {

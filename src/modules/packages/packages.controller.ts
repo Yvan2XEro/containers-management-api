@@ -61,6 +61,15 @@ export class PackagesController {
     return this.service.findByChargeId(+id);
   }
 
+  @Get('clients/:id')
+  @ApiResponse({
+    type: DefaultPackageResponse,
+    isArray: true,
+  })
+  findByClientId(@Param('id') id: string) {
+    return this.service.findByClientId(+id);
+  }
+  
   @Get(':id')
   @ApiResponse({
     type: DefaultPackageResponse,

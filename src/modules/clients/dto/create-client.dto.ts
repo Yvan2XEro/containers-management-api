@@ -24,12 +24,6 @@ export class CreateClientDto {
     @IsOptional()
     @ApiPropertyOptional()
     address: string|null;
-
-    @ApiProperty()
-    @IsNumber()
-    @IsOptional()
-    @ApiPropertyOptional()
-    balance: number;
 }
 
 export class DefaultClientResponse extends CreateClientDto{

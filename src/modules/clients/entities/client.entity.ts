@@ -15,11 +15,4 @@ export class Client extends DefaultEntity{
     
     @Column("varchar",{nullable: true})
     address: string|null;
-
-    @Column("decimal", {
-        precision: 10, scale: 2,
-        transformer: new DecimalColumnTransformer(),
-        default: 0
-    })
-    balance: number;
 }

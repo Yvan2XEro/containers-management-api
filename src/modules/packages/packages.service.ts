@@ -52,7 +52,8 @@ export class PackagesService {
       .leftJoinAndSelect('pack.charge', 'ch')
       .leftJoinAndSelect('pack.cubicMeter', 'cm')
       .leftJoinAndSelect('ch.transaction', 'tr')
-      .where('charge_id = :id', { id });
+      .orderBy('pack.updatedAt', 'DESC')
+      .where('pack.charge_id = :id', { id });
 
     return query.getMany();
   }
@@ -64,7 +65,8 @@ export class PackagesService {
       .leftJoinAndSelect('pack.charge', 'ch')
       .leftJoinAndSelect('pack.cubicMeter', 'cm')
       .leftJoinAndSelect('ch.transaction', 'tr')
-      .where('client_id = :id', { id });
+      .orderBy('pack.updatedAt', 'DESC')
+      .where('pack.client_id = :id', { id });
 
     return query.getMany();
   }

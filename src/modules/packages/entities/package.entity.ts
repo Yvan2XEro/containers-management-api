@@ -65,6 +65,9 @@ export class Package extends DefaultEntity {
         name: "cubic_meters_count"
     })
     cubicMetersCount: number
+
+    @Column("varchar", {nullable: true})
+    label: string|null
 }
 
 

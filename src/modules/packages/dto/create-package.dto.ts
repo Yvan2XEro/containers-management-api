@@ -68,6 +68,12 @@ export class CreatePackageDto {
   @ApiProperty()
   @IsNumber()
   cubicMetersCount: number;
+
+  @ApiProperty()
+  @IsNumber()
+  @ApiPropertyOptional()
+  @IsOptional()
+  label: string|null
 }
 
 export class DefaultPackageResponse extends CreatePackageDto {

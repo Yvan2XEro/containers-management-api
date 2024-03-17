@@ -70,7 +70,7 @@ export class CreatePackageDto {
   cubicMetersCount: number;
 
   @ApiProperty()
-  @IsNumber()
+  @IsString()
   @ApiPropertyOptional()
   @IsOptional()
   label: string|null

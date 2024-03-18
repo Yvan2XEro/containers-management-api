@@ -74,13 +74,11 @@ export class UsersService {
   }
 
   async update(id: any, updateUserDto: UpdateUserDto) {
-    const user = await this.repository.preload({
-      id,
-      ...updateUserDto,
-    });
+    const user = await this.repository.findOneBy({id});
     if (!user) {
       throw new NotFoundException(`UserEntity with id ${id} does not exist`);
     }
+    Object.assign(user, {...updateUserDto})
     return this.repository.save(user);
   }
 

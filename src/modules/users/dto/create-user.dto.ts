@@ -21,6 +21,8 @@ export class CreateUserDto {
 
   @ApiProperty()
   @IsString()
+  @IsOptional()
+  @ApiPropertyOptional()
   readonly photo?: string;
 
   @ApiProperty()

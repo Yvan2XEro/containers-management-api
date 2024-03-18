@@ -27,6 +27,7 @@ export class OfficesService {
 
   findAll() {
     return this.repository.find({
+      relations: ['users'],
       order: {
         updatedAt: 'DESC',
       },

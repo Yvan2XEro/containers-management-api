@@ -75,7 +75,7 @@ export class UserEntity extends DefaultEntity {
   })
   externalId: string | null;
 
-  @ManyToOne(() => Office, (o) => o.id, { eager: false, nullable: true })
+  @ManyToOne(() => Office, (o) => o.id, { eager: true, nullable: true })
   @JoinColumn({ name: 'office_id' })
   office: Office | null;
 

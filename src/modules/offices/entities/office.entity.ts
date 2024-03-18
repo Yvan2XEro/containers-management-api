@@ -10,6 +10,6 @@ export class Office extends DefaultEntity{
     @Column({nullable: true})
     description: string|null
 
-    @OneToMany(() => UserEntity, (o) => o.office, { eager: true, nullable: true })
+    @OneToMany(() => UserEntity, (o) => o.office, { eager: false, nullable: true })
     users: UserEntity[] | null
 }

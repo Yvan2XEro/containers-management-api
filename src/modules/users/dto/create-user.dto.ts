@@ -1,5 +1,7 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
+import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { Office } from '../../../modules/offices/entities/office.entity';
+import { DefaultOfficeResponse } from '../../../modules/offices/dto/create-office.dto';
 
 export class CreateUserDto {
   @ApiProperty()
@@ -21,6 +23,16 @@ export class CreateUserDto {
   @IsString()
   readonly photo?: string;
 
+  @ApiProperty()
+  @IsString()
+  phone: string | null;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsOptional()
+  @ApiPropertyOptional()
+  office?: Office | null;
+
 }
 
 
@@ -35,4 +47,7 @@ export class DefaultUserResponse extends CreateUserDto {
 
   @ApiProperty()
   readonly updatedAt: Date;
+
+  @ApiProperty({type: DefaultOfficeResponse})
+  office?: Office;
 }

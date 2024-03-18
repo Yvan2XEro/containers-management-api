@@ -21,14 +21,13 @@ export class UsersModule implements OnModuleInit {
     const email = process.env.ROOT_EMAIL
     const password = process.env.ROOT_PASSWORD
 
-    const adminAlreadyExists = await this.usersService.emailAlreadyExists(email)
-
-
-    if (!adminAlreadyExists) {
+    const staff = await this.usersService.getStaff()
+    if (!staff) {
       const a = await this.usersService.create({
         email,
         password,
         name: "Super Admin",
+        phone: "0000000000",
       })
       this.usersService.grantStaff(a.id)
     }

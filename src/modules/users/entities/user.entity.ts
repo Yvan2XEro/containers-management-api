@@ -1,13 +1,19 @@
 import { DefaultEntity } from '../../../shared/entities/default.entity';
 import * as bcrypt from 'bcrypt';
-import { BeforeInsert, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Office } from '../../../modules/offices/entities/office.entity';
+import {
+  BeforeInsert,
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('users')
 export class UserEntity extends DefaultEntity {
-
-  // @PrimaryGeneratedColumn('uuid')
-  // id: string
-
   @CreateDateColumn({
     name: 'created_at',
   })
@@ -34,34 +40,43 @@ export class UserEntity extends DefaultEntity {
 
   @Column({
     name: 'photo',
-    nullable: true
+    nullable: true,
   })
   photo: string;
 
   @Column({
-    name: "is_admin",
-    default: false
+    name: 'is_admin',
+    default: false,
   })
   isAdmin: boolean;
 
   @Column({
-    name: "is_staff",
-    default: false
+    name: 'is_staff',
+    default: false,
   })
   isStaff: boolean;
 
   @Column({
     nullable: true,
-    default: "local",
+  })
+  phone: string | null;
+
+  @Column({
+    nullable: true,
+    default: 'local',
   })
   provider: string | null;
 
   @Column({
     nullable: true,
     unique: true,
-    name: "external_id",
+    name: 'external_id',
   })
   externalId: string | null;
+
+  @ManyToOne(() => Office, (o) => o.id, { eager: false, nullable: true })
+  @JoinColumn({ name: 'office_id' })
+  office: Office | null;
 
   @BeforeInsert()
   async hashPassword() {

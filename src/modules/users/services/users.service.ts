@@ -39,13 +39,12 @@ export class UsersService {
     return saveUser;
   }
 
-  async findAll(): Promise<PaginationResult<UserEntity>> {
-    const [data, count] = await this.userRepository.findAndCount({
+  async findAll(){
+    return await this.userRepository.find({
       order: {
         updatedAt: "DESC"
       }
     });
-    return { meta: { count }, data }
   }
 
   async findByEmailAndGetPassword(email: string) {
@@ -161,5 +160,13 @@ export class UsersService {
     user.isAdmin = true;
     user.isStaff = true;
     return this.userRepository.save(user);
+  }
+
+  async getStaff() {
+    return await this.userRepository.findOne({
+      where: {
+        isStaff: true,
+      },
+    });
   }
 }

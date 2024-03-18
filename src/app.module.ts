@@ -13,6 +13,7 @@ import { PackagesModule } from './modules/packages/packages.module';
 import { ChargesModule } from './modules/charges/charges.module';
 import { TransactionsModule } from './modules/transactions/transactions.module';
 import { CubicMetersModule } from './modules/cubic-meters/cubic-meters.module';
+import { OfficesModule } from './modules/offices/offices.module';
 
 @Module({
   imports: [
@@ -70,6 +71,7 @@ import { CubicMetersModule } from './modules/cubic-meters/cubic-meters.module';
     ChargesModule,
     TransactionsModule,
     CubicMetersModule,
+    OfficesModule,
   ],
 })
 export class AppModule { }

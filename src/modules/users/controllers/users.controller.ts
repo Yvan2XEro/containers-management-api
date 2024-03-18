@@ -6,11 +6,13 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiOperation,
+  ApiQuery,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
@@ -28,7 +30,7 @@ import { AdminGuard } from '../../auth/guards/admin.guard';
 @Controller('users')
 @UseGuards(JwtAuthGuard)
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly service: UsersService) { }
 
   @ApiOperation({ summary: 'create a user' })
   @ApiResponse({
@@ -38,7 +40,7 @@ export class UsersController {
   @Public()
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+    return this.service.create(createUserDto);
   }
 
 
@@ -50,7 +52,7 @@ export class UsersController {
   @ApiBearerAuth('access-token')
   @Get()
   findAll() {
-    return this.usersService.findAll();
+    return this.service.findAll();
   }
 
   @ApiBearerAuth('access-token')
@@ -60,7 +62,7 @@ export class UsersController {
   })
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.usersService.findOne(id);
+    return this.service.findOne(id);
   }
 
   @ApiBearerAuth('access-token')
@@ -71,13 +73,13 @@ export class UsersController {
     type: DefaultUserResponse,
   })
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(id, updateUserDto);
+    return this.service.update(id, updateUserDto);
   }
 
   @ApiBearerAuth('access-token')
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.usersService.remove(id);
+    return this.service.remove(id);
   }
 
   @Patch(':id/grant-admin')
@@ -90,7 +92,7 @@ export class UsersController {
     type: DefaultUserResponse,
   })
   public grantAdmin(@Param('id') id: string) {
-    return this.usersService.grantAdmin(id);
+    return this.service.grantAdmin(id);
   }
 
   @Patch(':id/revoke-admin')
@@ -103,6 +105,16 @@ export class UsersController {
     type: DefaultUserResponse,
   })
   public revokeAdmin(@Param('id') id: string) {
-    return this.usersService.revokeAdmin(id);
+    return this.service.revokeAdmin(id);
+  }
+
+  @Delete()
+  @ApiOperation({ summary: 'Delete multi items by ids ( ?ids=1,2,3,4,5 )' })
+  @ApiQuery({ name: 'ids', type: 'string' })
+  public async deleteMany(@Query('ids') ids: string) {
+    if (!ids?.length) {
+      return Promise.resolve();
+    }
+    return this.service.removeMany(ids?.split(',').map((item) => +item));
   }
 }

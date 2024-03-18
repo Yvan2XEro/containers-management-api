@@ -1,5 +1,11 @@
 import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { Office } from '../../../modules/offices/entities/office.entity';
 import { DefaultOfficeResponse } from '../../../modules/offices/dto/create-office.dto';
 
@@ -26,6 +32,8 @@ export class CreateUserDto {
   readonly photo?: string;
 
   @ApiProperty()
+  @IsOptional()
+  @ApiPropertyOptional()
   @IsString()
   phone: string | null;
 
@@ -34,11 +42,15 @@ export class CreateUserDto {
   @IsOptional()
   @ApiPropertyOptional()
   office?: Office | null;
-
 }
 
-
-export class UpdateUserDto extends PartialType(CreateUserDto) { }
+export class UpdateUserDto extends PartialType(CreateUserDto) {
+  @ApiPropertyOptional()
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  readonly password: string;
+}
 
 export class DefaultUserResponse extends CreateUserDto {
   @ApiProperty()
@@ -50,6 +62,6 @@ export class DefaultUserResponse extends CreateUserDto {
   @ApiProperty()
   readonly updatedAt: Date;
 
-  @ApiProperty({type: DefaultOfficeResponse})
+  @ApiProperty({ type: DefaultOfficeResponse })
   office?: Office;
 }

@@ -3,6 +3,7 @@ import * as bcrypt from 'bcrypt';
 import { Office } from '../../../modules/offices/entities/office.entity';
 import {
   BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -79,6 +80,7 @@ export class UserEntity extends DefaultEntity {
   office: Office | null;
 
   @BeforeInsert()
+  @BeforeUpdate()
   async hashPassword() {
     if (this.password) {
       this.password = await bcrypt.hash(this.password, 10);

@@ -1,76 +1,72 @@
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger"
-import { IsNumber, IsOptional, IsString } from "class-validator"
-import { DefaultTransactionResponse } from "../../../modules/transactions/dto/create-transaction.dto"
-import { Transaction } from "../../../modules/transactions/entities/transaction.entity"
-import { PaginatedMetaDto } from "../../../shared/dto/paginated.dto"
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { DefaultTransactionResponse } from '../../../modules/transactions/dto/create-transaction.dto';
+import { Transaction } from '../../../modules/transactions/entities/transaction.entity';
+import { PaginatedMetaDto } from '../../../shared/dto/paginated.dto';
 
 export class CreateChargeDto {
+  @ApiProperty()
+  @ApiPropertyOptional()
+  @IsNumber()
+  @IsOptional()
+  extraCoastAmount: number;
 
-    @ApiProperty()
-    @ApiPropertyOptional()
-    @IsNumber()
-    @IsOptional()
-    extraCoastAmount: number
+  @ApiPropertyOptional()
+  @ApiProperty()
+  @IsOptional()
+  description: string | null;
 
-    @ApiPropertyOptional()
-    @ApiProperty()
-    @IsOptional()
-    description: string|null
+  @ApiProperty()
+  @IsString()
+  number: string;
 
-    @ApiProperty()
-    @IsString()
-    number: string
+  @ApiProperty()
+  @IsNumber()
+  capacity: number | null;
 
-    @ApiProperty()
-    @IsNumber()
-    capacity: number
+  @ApiProperty()
+  @IsNumber()
+  weigth: number | null;
 
-    @ApiProperty()
-    @IsNumber()
-    weigth: number
+  @ApiProperty()
+  @IsNumber()
+  maxWeigth: number | null;
 
-    @ApiProperty()
-    @IsNumber()
-    maxWeigth: number
-    
-    @ApiProperty()
-    @IsString()
-    type: string
+  @ApiProperty()
+  @IsString()
+  type: string | null;
 
-
-    @ApiProperty({
-        type: Number
-    })
-    @IsNumber()
-    transaction: Transaction|null
-
+  @ApiProperty({
+    type: Number,
+  })
+  @IsNumber()
+  transaction: Transaction | null;
 }
 
 export class DefaultChargeResponse extends CreateChargeDto {
-    @ApiProperty()
-    id: number
+  @ApiProperty()
+  id: number;
 
-    @ApiProperty()
-    createdAt: Date
+  @ApiProperty()
+  createdAt: Date;
 
-    @ApiProperty()
-    updatedAt: Date;
+  @ApiProperty()
+  updatedAt: Date;
 
-    @ApiProperty({
-        type: DefaultTransactionResponse
-    })
-    transaction: Transaction
+  @ApiProperty({
+    type: DefaultTransactionResponse,
+  })
+  transaction: Transaction;
 }
 
 export class PaginatedChargesResponse {
-
-    @ApiProperty({
-        type: PaginatedMetaDto
-    })
-    meta: any
-    @ApiProperty({
-        type: DefaultChargeResponse,
-        isArray: true
-    })
-    data: DefaultChargeResponse[]
+  @ApiProperty({
+    type: PaginatedMetaDto,
+  })
+  meta: any;
+  @ApiProperty({
+    type: DefaultChargeResponse,
+    isArray: true,
+  })
+  data: DefaultChargeResponse[];
 }

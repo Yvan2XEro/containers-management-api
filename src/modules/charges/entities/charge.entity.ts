@@ -20,26 +20,28 @@ export class Charge extends DefaultEntity {
     @Column({unique: true})
     number: string
 
-    @Column()
-    type: string
+    @Column({nullable: true})
+    type: string | null;
     
-    @Column({default: 0})
-    capacity: number
-
-    @Column("decimal", {
-        precision: 10, scale: 2,
-        transformer: new DecimalColumnTransformer(),
-        default: 0
-    })
-    weigth: number
+    @Column({default: 0, nullable: true})
+    capacity: number | null;
 
     @Column("decimal", {
         precision: 10, scale: 2,
         transformer: new DecimalColumnTransformer(),
         default: 0,
-        name: "max_weigth"
+        nullable: true
     })
-    maxWeigth: number
+    weigth: number | null;
+
+    @Column("decimal", {
+        precision: 10, scale: 2,
+        transformer: new DecimalColumnTransformer(),
+        default: 0,
+        name: "max_weigth",
+        nullable: true
+    })
+    maxWeigth: number | null;
 
     @ManyToOne(()=>Transaction, t=>t.id, {
         nullable: true,

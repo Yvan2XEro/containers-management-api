@@ -74,6 +74,13 @@ export class CreatePackageDto {
   @ApiPropertyOptional()
   @IsOptional()
   label: string|null
+
+  @ApiProperty()
+  @IsString()
+  @ApiPropertyOptional()
+  @IsOptional()
+  manualNumbers: string | null
+
 }
 
 export class DefaultPackageResponse extends CreatePackageDto {

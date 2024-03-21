@@ -18,6 +18,9 @@ export class Package extends DefaultEntity {
     @Column({name: "tracking_number", unique: true})
     trackingNumber: string
 
+    @Column({name: "manual_numbers", nullable: true})
+    manualNumbers: string | null
+
     @Column("decimal", {
         precision: 10, scale: 2,
         transformer: new DecimalColumnTransformer(),

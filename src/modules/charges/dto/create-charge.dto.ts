@@ -11,8 +11,8 @@ export class CreateChargeDto {
   @IsOptional()
   extraCoastAmount: number;
 
-  @ApiPropertyOptional()
   @ApiProperty()
+  @ApiPropertyOptional()
   @IsOptional()
   description: string | null;
 
@@ -22,18 +22,26 @@ export class CreateChargeDto {
 
   @ApiProperty()
   @IsNumber()
+  @ApiPropertyOptional()
+  @IsOptional()
   capacity: number | null;
 
   @ApiProperty()
   @IsNumber()
+  @ApiPropertyOptional()
+  @IsOptional()
   weigth: number | null;
 
   @ApiProperty()
   @IsNumber()
+  @ApiPropertyOptional()
+  @IsOptional()
   maxWeigth: number | null;
 
   @ApiProperty()
   @IsString()
+  @ApiPropertyOptional()
+  @IsOptional()
   type: string | null;
 
   @ApiProperty({

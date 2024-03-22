@@ -25,17 +25,21 @@ export class ChargesService {
   }: PaginationParams & { transaction?: number; departureDate: any }) {
     const query = this.repository.createQueryBuilder('ch');
     query.leftJoinAndSelect('ch.transaction', 'tr');
-    if (q && q.length > 0) {
-      const search = q.toLocaleLowerCase();
-      query.where(`LOWER(ch.number) like '%${search}%'`);
-      query.orWhere(`ch.description like '%${search}%'`);
-    }
+    if (!departureDate && departureDate?.length < 2) {
+      if (q && q.length > 0) {
+        const search = q.toLocaleLowerCase();
+        query.where(`LOWER(ch.number) like '%${search}%'`);
+        query.orWhere(`ch.description like '%${search}%'`);
+      }
 
-    if (!!transaction && !isNaN(transaction)) {
-      query.andWhere(`ch.transaction_id = :transaction`, { transaction });
+      if (!!transaction && !isNaN(transaction)) {
+        query.andWhere(`ch.transaction_id = :transaction`, { transaction });
+      }
     }
-    if (!!departureDate) {
-      query.andWhere(`tr.departureDate = :departureDate`, { departureDate });
+    if (!!departureDate && departureDate?.length > 4) {
+      query.andWhere(`tr.departureDate =  DATE(:departureDate)`, {
+        departureDate,
+      });
     }
     query.take(limit).skip((page - 1) * limit);
     const [data, count] = await query

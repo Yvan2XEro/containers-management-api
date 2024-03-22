@@ -26,6 +26,7 @@ export class PackagesService {
     query
       .leftJoinAndSelect('pack.client', 'cl')
       .leftJoinAndSelect('pack.charge', 'ch')
+      .leftJoinAndSelect('ch.transaction', 'tr')
       .leftJoinAndSelect('pack.cubicMeter', 'cm');
 
     if (q && q.length > 0) {

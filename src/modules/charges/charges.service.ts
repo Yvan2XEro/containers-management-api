@@ -31,10 +31,9 @@ export class ChargesService {
         query.where(`LOWER(ch.number) like '%${search}%'`);
         query.orWhere(`ch.description like '%${search}%'`);
       }
-
-      if (!!transaction && !isNaN(transaction)) {
-        query.andWhere(`ch.transaction_id = :transaction`, { transaction });
-      }
+    }
+    if (!!transaction && !isNaN(transaction)) {
+      query.andWhere(`ch.transaction_id = :transaction`, { transaction });
     }
     if (!!departureDate && departureDate?.length > 4) {
       query.andWhere(`tr.departureDate =  DATE(:departureDate)`, {
